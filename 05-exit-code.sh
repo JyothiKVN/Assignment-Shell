@@ -5,21 +5,21 @@
 
 #!/bin/bash 
 
-# if(ls /tmp;) then
-#     echo "SUCCESS"
-# else 
-#     echo "FAILURE"
-# fi
+logs_file=/tmp/exitlog.txt
 
-if(ls /fakedir;) then
-    echo "SUCCESS"
+ls /tmp &>$logs_file
+CMD_01=$?  
+ls /tmp &>$logs_file
+CMD_02=$? 
+
+if [[ $CMD_01 -ne 0 || $CMD_02 -ne 0 ]]; then 
+    echo "One of the Exiting with 1"
+    exit 1
 else 
-    echo "FAILURE"
+    echo "All commands are successfull."
+    exit 0
 fi
+
  
-
-if(ping -c1 google.com;) then
-    echo "SUCCESS"
-else 
-    echo "FAILURE"
-fi
+ 
+ 
